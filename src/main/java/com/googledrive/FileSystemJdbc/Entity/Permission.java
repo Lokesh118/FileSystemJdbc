@@ -20,6 +20,12 @@ public class Permission {
     private String userId;
     @Column(name = "read_access")
     private String readAccess;
+    public Permission(String fileId, String userId, String readAccess, String writeAccess) {
+        this.fileId = fileId;
+        this.userId = userId;
+        this.readAccess = readAccess;
+        this.writeAccess = writeAccess;
+    }
     @Column(name = "write_access")
     private String writeAccess;
     public Permission() {
