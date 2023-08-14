@@ -15,17 +15,11 @@ import java.util.Date;
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "file_id")
     private int fileId;
-    @Column(name = "file_name")
     private String fileName;
-    @Column(name = "upload_date")
     private Date uploadDate;
-    @Column(name = "bucket_name")
     private String bucketName;
-    @Column(name = "file_size")
     private String fileSize;
-    @Column(name = "owner_id")
     private String ownerId;
 
     public File(){

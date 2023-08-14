@@ -75,7 +75,7 @@ public class FileController {
             if(file.getFileId() == file_id){
                 String bucketName = file.getBucketName();
                 String ownerId = file.getOwnerId();
-                String fileName = file.getFileName();
+                String fileName = ownerId + "/" + file.getFileName();
                 System.out.println(fileName +" " + bucketName + " " + ownerId);
                 InputStream inputStream = resourceLoader.getResource("classpath:service_account_key.json").getInputStream();
                 Credentials credentials = GoogleCredentials.fromStream(inputStream);
@@ -120,7 +120,7 @@ public class FileController {
             return new ResponseEntity<String>("file is null", HttpStatus.BAD_REQUEST);
         }
         try{
-            String filename =  file.getOriginalFilename();
+            String filename =  userId + "/" + file.getOriginalFilename();
             InputStream inputStream = resourceLoader.getResource("classpath:service_account_key.json").getInputStream();
             Credentials credentials = GoogleCredentials.fromStream(inputStream);
             Storage storage = StorageOptions.newBuilder().setCredentials(credentials).setProjectId("drive-spring-180102045").build().getService();
