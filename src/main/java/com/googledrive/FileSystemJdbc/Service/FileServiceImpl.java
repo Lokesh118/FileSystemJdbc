@@ -21,6 +21,10 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
+    public List<File> getUserFiles(String userId){
+        return fileRepository.findByOwnerId(userId);
+    }
+    @Override
     public List<File> getFiles(){
         return fileRepository.findAll();
     }    

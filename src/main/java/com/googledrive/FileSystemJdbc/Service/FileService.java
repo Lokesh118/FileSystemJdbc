@@ -9,5 +9,6 @@ import com.googledrive.FileSystemJdbc.Entity.File;
 @Qualifier("file")
 public interface FileService {
     public void addFile(File file);
+    public List<File> getUserFiles(String userId);
     public List<File> getFiles();
 }

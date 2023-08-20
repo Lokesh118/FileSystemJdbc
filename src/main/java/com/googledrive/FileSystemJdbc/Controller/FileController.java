@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,7 @@ import java.util.List;
 @RestController
 @Qualifier("file")
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FileController {
     @Autowired
     private ResourceLoader resourceLoader;
@@ -67,8 +69,14 @@ public class FileController {
         }
     }
 
+    @GetMapping("/allFiles")
+    public ResponseEntity<List<File>> allfiles(@RequestParam("userId") String userId){
+        List<File> userFiles = fileService.getUserFiles(userId);
+        return new ResponseEntity<List<File>>(userFiles, HttpStatus.OK);
+    }
+    
     @GetMapping("/download")
-    public ResponseEntity<ByteArrayResource> download(@RequestPart("fileId") String fileId) throws IOException{
+    public ResponseEntity<ByteArrayResource> download(@RequestParam("fileId") String fileId) throws IOException{
         List<File> files = fileService.getFiles();
         int file_id = Integer.parseInt(fileId);
         for(File file: files){
